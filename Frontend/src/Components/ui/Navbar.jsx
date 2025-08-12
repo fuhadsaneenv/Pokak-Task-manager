@@ -9,7 +9,6 @@ export default function Navbar() {
           alt="Listify Logo" 
           className="w-[100px] h-[100px] object-contain" 
         />
-        {/* <span className="text-xl font-semibold text-gray-800">Listify</span> */}
       </div>
       <div className="flex space-x-6">
         <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">About us</a>

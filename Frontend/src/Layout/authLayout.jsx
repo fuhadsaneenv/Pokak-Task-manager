@@ -3,7 +3,7 @@
 //       <div
 //         className="min-h-screen flex items-center justify-center bg-no-repeat bg-center bg-cover"
 //         style={{
-//           backgroundImage: "url('/Line.png')", // place your image in public folder
+//           backgroundImage: "url('/Line.png')",
 //         }}
 //       >
 //         <div className="bg-white/40 backdrop-blur-lg p-8 rounded-3xl shadow-lg w-[420px] min-h-[500px]">
