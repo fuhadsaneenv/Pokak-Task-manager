@@ -2,21 +2,24 @@ import User from "../Models/UserModel.js";
 import { hashPassword, comparePassword } from "../Utils/bcrypt.js";
 import generateToken from "../Utils/jwt.js";
 
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
-      return res.status(400).json({ message: "Please fill all fields" });
+      const error = new Error("Please fill all fields");
+      error.statusCode = 400;
+      return next(error);
     }
 
     const userExists = await User.findOne({ email });
     if (userExists) {
-      return res.status(400).json({ message: "User already exists" });
+      const error = new Error("User already exists");
+      error.statusCode = 400;
+      return next(error);
     }
 
     const hashedPassword = await hashPassword(password);
-
     const user = await User.create({ name, email, password: hashedPassword });
 
     generateToken(res, user._id);
@@ -27,20 +30,27 @@ export const register = async (req, res) => {
       email: user.email,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);  
   }
 };
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "Invalid credentials" });
+    if (!user) {
+      const error = new Error("Invalid credentials");
+      error.statusCode = 400;
+      return next(error);
+    }
 
     const isMatch = await comparePassword(password, user.password);
-    if (!isMatch)
-      return res.status(400).json({ message: "Invalid credentials" });
+    if (!isMatch) {
+      const error = new Error("Invalid credentials");
+      error.statusCode = 400;
+      return next(error);
+    }
 
     generateToken(res, user._id);
 
@@ -50,11 +60,15 @@ export const login = async (req, res) => {
       email: user.email,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);  
   }
 };
 
-export const logout = (req, res) => {
-  res.cookie("token", "", { httpOnly: true, expires: new Date(0) });
-  res.status(200).json({ message: "Logged out successfully" });
+export const logout = (req, res, next) => {
+  try {
+    res.cookie("token", "", { httpOnly: true, expires: new Date(0) });
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    next(error);
+  }
 };
