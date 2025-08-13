@@ -32,7 +32,7 @@ export default function Login() {
         backgroundImage: "url('Line.png')",
       }}
     >
-      <div className="bg-white/5 backdrop-blur-md rounded-3xl shadow-lg w-[800px] min-h-[750px] p-10">
+      <div className="bg-white/5 backdrop-blur-md rounded-3xl shadow-lg w-[750px] min-h-[500px] p-10">
         <h2 className="text-xl font-bold text-center text-blue-400 mb-7">Login</h2>
         <p className="text-center font-bold text-gray-500 text-sm mb-6">
           Welcome! Sign in using your social <br />

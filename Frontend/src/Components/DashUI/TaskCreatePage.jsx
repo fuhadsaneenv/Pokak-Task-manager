@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { CheckIcon } from 'lucide-react'
 
-export function TaskCreatePage({  onSave }) {
+export function TaskCreatePage({ onSave, existingTags = [] }) {
   const [taskName, setTaskName] = useState('')
   const [taskDescription, setTaskDescription] = useState('')
   const [selectedColor, setSelectedColor] = useState('green')
   const [repeatOption, setRepeatOption] = useState('daily')
-  const [selectedTag, setSelectedTag] = useState('Daily Routine')
+  const [selectedTag, setSelectedTag] = useState(existingTags[0] || '')
+  const [tags, setTags] = useState(existingTags)
+  const [showNewTagInput, setShowNewTagInput] = useState(false)
+  const [newTagName, setNewTagName] = useState('')
 
   const colors = [
     { name: 'light-green', class: 'bg-green-100' },
@@ -34,7 +37,23 @@ export function TaskCreatePage({  onSave }) {
       color: selectedColor,
       repeat: repeatOption,
       tag: selectedTag,
+      completed: false,
     })
+    // Reset form
+    setTaskName('')
+    setTaskDescription('')
+    setSelectedColor('green')
+    setRepeatOption('daily')
+    setSelectedTag(tags[0] || '')
+  }
+
+  const handleAddNewTag = () => {
+    const trimmed = newTagName.trim()
+    if (!trimmed) return
+    if (!tags.includes(trimmed)) setTags([...tags, trimmed])
+    setSelectedTag(trimmed)
+    setNewTagName('')
+    setShowNewTagInput(false)
   }
 
   return (
@@ -98,27 +117,27 @@ export function TaskCreatePage({  onSave }) {
             <p className="text-sm text-gray-500 mb-4">Set a cycle for your task</p>
 
             <div className="flex space-x-0 mb-4 bg-gray-100 rounded-full p-1 w-fit">
-  {['Daily', 'Weekly', 'Monthly'].map((option) => (
-    <button
-      key={option}
-      className={`px-6 py-2 text-sm rounded-full transition-all duration-300 ${
-        repeatOption === option.toLowerCase()
-          ? 'bg-white shadow font-medium text-gray-800'
-          : 'bg-transparent text-gray-500 hover:text-gray-700'
-      }`}
-      onClick={() => setRepeatOption(option.toLowerCase())}
-    >
-      {option}
-    </button>
-  ))}
-</div>
+              {['Daily', 'Weekly', 'Monthly'].map((option) => (
+                <button
+                  key={option}
+                  className={`px-6 py-2 text-sm rounded-full transition-all duration-300 ${
+                    repeatOption === option.toLowerCase()
+                      ? 'bg-white shadow font-medium text-gray-800'
+                      : 'bg-transparent text-gray-500 hover:text-gray-700'
+                  }`}
+                  onClick={() => setRepeatOption(option.toLowerCase())}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
 
             <div className="flex justify-between">
               {weekdays.map((day, index) => (
                 <button
                   key={day}
                   className={`w-10 h-10 text-sm flex items-center justify-center rounded-full transition-colors ${
-                    index === 5
+                    index >= 5
                       ? 'bg-gray-200 font-medium'
                       : 'bg-white border border-gray-200 hover:bg-gray-100'
                   }`}
@@ -130,9 +149,7 @@ export function TaskCreatePage({  onSave }) {
 
             <div className="mt-6 flex justify-between items-center text-sm text-gray-500 border-t pt-3">
               <span>Repeat</span>
-              <span className="cursor-pointer hover:underline">
-                Every week &gt;
-              </span>
+              <span className="cursor-pointer hover:underline">Every week &gt;</span>
             </div>
           </div>
 
@@ -142,7 +159,7 @@ export function TaskCreatePage({  onSave }) {
               Set a tag for your task
             </h2>
             <div className="flex flex-wrap gap-2">
-              {['Daily Routine', 'Add More +', 'Study Routine'].map((tag) => (
+              {tags.map((tag) => (
                 <button
                   key={tag}
                   className={`px-4 py-2 text-sm rounded-full transition-colors ${
@@ -155,6 +172,27 @@ export function TaskCreatePage({  onSave }) {
                   {tag}
                 </button>
               ))}
+
+              {!showNewTagInput && (
+                <button
+                  className="px-4 py-2 text-sm rounded-full bg-white border border-gray-200 hover:bg-gray-100"
+                  onClick={() => setShowNewTagInput(true)}
+                >
+                  Add More +
+                </button>
+              )}
+
+              {showNewTagInput && (
+                <input
+                  type="text"
+                  value={newTagName}
+                  autoFocus
+                  onChange={(e) => setNewTagName(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleAddNewTag()}
+                  placeholder="New tag"
+                  className="px-3 py-1.5 text-sm border border-gray-300 rounded-full focus:outline-none focus:ring focus:ring-blue-200"
+                />
+              )}
             </div>
           </div>
         </div>

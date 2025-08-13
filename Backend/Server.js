@@ -4,6 +4,7 @@ import connectDB from "./src/Config/dbConfig.js";
 import UserRouter from "./src/Routes/userRoute.js";
 import errorHandler from "./src/Middleware/errorHandler.js";
 import cors from "cors"
+import Taskrouter from "./src/Routes/taskRoute.js";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(
 connectDB();
 
 app.use('/api/user', UserRouter);
+app.use('/api/tasks', Taskrouter);
 
 
 
