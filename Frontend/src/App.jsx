@@ -7,12 +7,13 @@ import Navbar from './Components/ui/Navbar'
 import Register from './Pages/Registration'
 import Login from './Pages/Login'
 import { DashLayout } from './Layout/dashLayout'
+import "./App.css"
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Routes with Navbar */}
+        
         <Route
           path="/register"
           element={

@@ -24,7 +24,7 @@ export function DashSidebar({ selectedDate, onDateSelect, onTodayClick, selected
     ]
   
     return (
-      <div className="w-[200px] border-r border-gray-100 flex flex-col">
+      <div className="w-[300px] border-r border-gray-100 flex flex-col">
         <div className="sticky top-0 h-screen overflow-auto">
           <Calendar selectedDate={selectedDate} onDateSelect={onDateSelect} />
           <div className="mt-4">
