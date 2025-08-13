@@ -1,5 +1,8 @@
+
 import React, { useState } from 'react'
 import { CheckIcon } from 'lucide-react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export function TaskCreatePage({ onSave, existingTags = [] }) {
   const [taskName, setTaskName] = useState('')
@@ -30,7 +33,12 @@ export function TaskCreatePage({ onSave, existingTags = [] }) {
   const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
   const handleSave = () => {
-    if (!taskName.trim()) return
+    if (!taskName.trim()) {
+      toast.error('Task name cannot be empty!')
+      return
+    }
+    toast.success('Task created successfully!')
+
     onSave({
       title: taskName,
       description: taskDescription,
@@ -39,13 +47,15 @@ export function TaskCreatePage({ onSave, existingTags = [] }) {
       tag: selectedTag,
       completed: false,
     })
+    
+    
     // Reset form
     setTaskName('')
     setTaskDescription('')
     setSelectedColor('green')
     setRepeatOption('daily')
     setSelectedTag(tags[0] || '')
-  }
+}
 
   const handleAddNewTag = () => {
     const trimmed = newTagName.trim()
@@ -54,6 +64,7 @@ export function TaskCreatePage({ onSave, existingTags = [] }) {
     setSelectedTag(trimmed)
     setNewTagName('')
     setShowNewTagInput(false)
+    toast.success(`Tag "${trimmed}" added!`)
   }
 
   return (
@@ -205,6 +216,20 @@ export function TaskCreatePage({ onSave, existingTags = [] }) {
       >
         <CheckIcon size={22} />
       </button>
+
+      {/* Toast Container */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   )
 }

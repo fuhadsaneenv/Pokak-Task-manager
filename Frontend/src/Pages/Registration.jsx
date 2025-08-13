@@ -4,6 +4,8 @@ import axiosInstance from "../axiosInstance";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { BsApple } from "react-icons/bs";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -14,25 +16,22 @@ export default function Register() {
     password: "",
   });
 
-  const [error, setError] = useState("");
-
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    setError("");
 
     try {
       const { data } = await axiosInstance.post("/user/register", formData);
-      console.log("Registration success:", data);
-      navigate("/login");
+      toast.success("Registration successful!");
+      setTimeout(() => navigate("/login"), 1500); // Navigate after toast
     } catch (err) {
       if (err.response?.data?.message) {
-        setError(err.response.data.message);
+        toast.error(err.response.data.message);
       } else {
-        setError("Something went wrong");
+        toast.error("Something went wrong");
       }
     }
   };
@@ -50,9 +49,7 @@ export default function Register() {
           Welcome! Sign in using your social <br />
           account or email to continue us.
         </p>
-        {error && (
-          <div className="text-center text-red-500 mb-4 font-semibold">{error}</div>
-        )}
+
         <div className="flex justify-center space-x-6 mb-8">
           <button className="p-2">
             <FaFacebook className="text-blue-600 text-2xl" />
@@ -64,6 +61,7 @@ export default function Register() {
             <BsApple className="text-black text-2xl" />
           </button>
         </div>
+
         <form className="space-y-6 bg-transparent" onSubmit={handleRegisterSubmit}>
           <div className="border-b border-gray-300 py-2 w-[300px] mx-auto">
             <input
@@ -98,6 +96,7 @@ export default function Register() {
               required
             />
           </div>
+
           <div className="pt-6">
             <button
               type="submit"
@@ -106,17 +105,21 @@ export default function Register() {
               Register
             </button>
             <p className="mt-6 text-center text-sm text-gray-600">
-          Already have an account?{" "}
-          <a
-            href="/login"
-            className="text-purple-600 font-medium hover:underline"
-          >
-            Log in
-          </a>
-        </p>
+              Already have an account?{" "}
+              <a
+                href="/login"
+                className="text-purple-600 font-medium hover:underline"
+              >
+                Log in
+              </a>
+            </p>
           </div>
         </form>
+
+        {/* Toast container */}
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
       </div>
     </div>
   );
 }
+

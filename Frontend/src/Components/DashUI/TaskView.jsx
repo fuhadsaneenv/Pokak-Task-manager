@@ -1,22 +1,39 @@
-
-
-import React, { useState } from 'react'
-import { Task } from './Task'
-import { PlusIcon } from 'lucide-react'
+import React, { useState } from 'react';
+import { Task } from './Task';
+import { PlusIcon } from 'lucide-react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function TaskView({ tasks, onToggleComplete, viewType, onCreateTask }) {
-  const [selectedTask, setSelectedTask] = useState(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = (task) => {
-    setSelectedTask(task)
-    setIsModalOpen(true)
-  }
+    setSelectedTask(task);
+    setIsModalOpen(true);
+    toast.info(`Opened task: "${task.title}"`);
+  };
 
   const closeModal = () => {
-    setIsModalOpen(false)
-    setSelectedTask(null)
-  }
+    if (selectedTask) toast.info(`Closed task: "${selectedTask.title}"`);
+    setIsModalOpen(false);
+    setSelectedTask(null);
+  };
+
+  const handleToggleComplete = (taskId) => {
+    onToggleComplete(taskId);
+    const task = tasks.find((t) => t._id === taskId);
+    if (task) {
+      toast.success(
+        `Task "${task.title}" marked as ${task.completed ? 'incomplete' : 'complete'}`
+      );
+    }
+  };
+
+  const handleCreateTask = () => {
+    onCreateTask();
+    toast.success('Opening task creation modal!');
+  };
 
   return (
     <div className="p-6 relative">
@@ -25,10 +42,10 @@ export function TaskView({ tasks, onToggleComplete, viewType, onCreateTask }) {
       <div className="space-y-2">
         {tasks.map((task) => (
           <Task
-            key={task.id}
+            key={task._id}
             task={task}
-            onToggleComplete={() => onToggleComplete(task.id)}
-            onOpenModal={() => handleOpenModal(task)} // only this opens modal
+            onToggleComplete={() => handleToggleComplete(task._id)}
+            onOpenModal={() => handleOpenModal(task)}
           />
         ))}
       </div>
@@ -36,7 +53,7 @@ export function TaskView({ tasks, onToggleComplete, viewType, onCreateTask }) {
       {/* Floating Add Button */}
       <button
         className="fixed bottom-6 right-6 bg-white shadow-lg rounded-full p-3"
-        onClick={onCreateTask}
+        onClick={handleCreateTask}
       >
         <PlusIcon className="h-6 w-6 text-gray-600" />
       </button>
@@ -59,6 +76,19 @@ export function TaskView({ tasks, onToggleComplete, viewType, onCreateTask }) {
           </div>
         </div>
       )}
+
+      {/* Toast Container */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="colored"
+      />
     </div>
-  )
+  );
 }
+
