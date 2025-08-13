@@ -5,11 +5,14 @@ import UserRouter from "./src/Routes/userRoute.js";
 import errorHandler from "./src/Middleware/errorHandler.js";
 import cors from "cors"
 import Taskrouter from "./src/Routes/taskRoute.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
+
 app.use(
     cors({
         origin: 'http://localhost:5173',

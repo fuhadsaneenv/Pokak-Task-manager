@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axiosInstance from "../axiosInstance";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,Link } from "react-router-dom";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { BsApple } from "react-icons/bs";
@@ -16,9 +16,12 @@ export default function Login() {
 
     try {
       setError("");
-      const response = await axiosInstance.post("/user/login", { email, password });
+      const response = await axiosInstance.post("/user/login", {
+        email,
+        password,
+      });
       console.log("Login success:", response.data);
-      navigate("/dashboard"); 
+      navigate("/dashboard");
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.message || "Login failed");
@@ -33,7 +36,9 @@ export default function Login() {
       }}
     >
       <div className="bg-white/5 backdrop-blur-md rounded-3xl shadow-lg w-[750px] min-h-[500px] p-10">
-        <h2 className="text-xl font-bold text-center text-blue-400 mb-7">Login</h2>
+        <h2 className="text-xl font-bold text-center text-blue-400 mb-7">
+          Login
+        </h2>
         <p className="text-center font-bold text-gray-500 text-sm mb-6">
           Welcome! Sign in using your social <br />
           account or email to continue us.
@@ -82,11 +87,18 @@ export default function Login() {
             >
               Login
             </button>
-            
           </div>
         </form>
+        <p className="mt-6 text-center text-sm text-gray-600">
+          Don’t have an account?{" "}
+          <Link
+            to="/register"
+            className="text-purple-600 font-medium hover:underline"
+          >
+            Sign Up
+          </Link>
+        </p>
       </div>
     </div>
   );
 }
-

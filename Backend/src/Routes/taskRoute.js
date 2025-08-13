@@ -4,14 +4,15 @@ import {   getTasks,
     createTask,
     updateTask,
     deleteTask,
-    toggleTask } from '../Controller/taskController.js';
+     } from '../Controller/taskController.js';
+import protect from '../Middleware/authMiddleware.js';
 
 const Taskrouter = express.Router();
 
-Taskrouter.get('/', getTasks);
-Taskrouter.post('/', createTask);
-Taskrouter.put('/:id', updateTask);
-Taskrouter.delete('/:id', deleteTask);
-Taskrouter.patch('/:id/toggle', toggleTask);
+Taskrouter.get('/', protect,getTasks);
+Taskrouter.post('/',protect, createTask);
+Taskrouter.put('/:id',protect, updateTask);
+Taskrouter.delete('/:id',protect, deleteTask);
+// Taskrouter.patch('/:id/toggle', toggleTask);
 
 export default Taskrouter;

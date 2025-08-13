@@ -1,50 +1,38 @@
-import taskModel from "../Models/taskModel.js";
+import Task from "../Models/taskModel.js";
 
-// Get all tasks
+// Get tasks for logged-in user
 export const getTasks = async (req, res) => {
-  const tasks = await taskModel.find().sort({ createdAt: -1 });
+  const tasks = await Task.find({ user: req.user });
   res.json(tasks);
 };
 
-// Create a task
+// Create new task
 export const createTask = async (req, res) => {
-  try {
-    const task = new taskModel(req.body);
-    await task.save();
-    res.status(201).json(task);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
+  const task = new Task({ ...req.body, user: req.user });
+  const saved = await task.save();
+  res.status(201).json(saved);
 };
 
-// Update a task
+// Update task
 export const updateTask = async (req, res) => {
-  try {
-    const updated = await taskModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(updated);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
+  const task = await Task.findById(req.params.id);
+  if (!task) return res.status(404).json({ message: "Task not found" });
+
+  if (task.user.toString() !== req.user)
+    return res.status(403).json({ message: "Not authorized" });
+
+  const updated = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  res.json(updated);
 };
 
-// Delete a task
+// Delete task
 export const deleteTask = async (req, res) => {
-  try {
-    await taskModel.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Task deleted' });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
+  const task = await Task.findById(req.params.id);
+  if (!task) return res.status(404).json({ message: "Task not found" });
 
-// Toggle task completion
-export const toggleTask = async (req, res) => {
-  try {
-    const task = await taskModel.findById(req.params.id);
-    task.completed = !task.completed;
-    await task.save();
-    res.json(task);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
+  if (task.user.toString() !== req.user)
+    return res.status(403).json({ message: "Not authorized" });
+
+  await task.remove();
+  res.json({ message: "Task deleted" });
 };
