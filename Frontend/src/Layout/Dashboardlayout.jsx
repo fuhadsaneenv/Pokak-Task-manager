@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../axiosInstance';
 import { DashNavbar } from '../Components/DashUI/DashNavbar';
 import { DashSidebar } from '../Components/DashUI/DashSidebar';
-import { TaskView } from '../Components/DashUI/Taskview';
+import { Taskview } from '../Components/DashUI/Taskview';
 import { TaskCreatePage } from '../Components/DashUI/TaskCreatePage';
 
  export function DashLayout() {
@@ -85,7 +85,7 @@ import { TaskCreatePage } from '../Components/DashUI/TaskCreatePage';
               existingTags={lists.map(l => l.name)}
             />
           ) : (
-            <TaskView
+            <Taskview
               tasks={filteredTasks}
               onToggleComplete={toggleTaskCompletion}
               viewType={selectedView}

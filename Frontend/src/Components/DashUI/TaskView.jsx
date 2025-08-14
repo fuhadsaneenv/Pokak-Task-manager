@@ -4,7 +4,7 @@ import { PlusIcon } from 'lucide-react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export function TaskView({ tasks, onToggleComplete, viewType, onCreateTask }) {
+export function Taskview({ tasks, onToggleComplete, viewType, onCreateTask }) {
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
