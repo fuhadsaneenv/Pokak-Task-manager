@@ -1,48 +1,83 @@
-import React from "react";
+// src/App.jsx or wherever your routes are defined
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./Components/ui/Navbar";
-import Register from "./Pages/Registration";
 import Login from "./Pages/Login";
-import "./App.css";
+import Register from "./Pages/Registration";
 import { DashLayout } from "./Layout/Dashboardlayout";
+import { PublicRoute } from "./ProtectRoute/PublicRoute";
 
-const App = () => {
+function App() {
   return (
     <Router>
       <Routes>
         <Route
-          path="/register"
-          element={
-            <>
-              <Navbar />
-              <Register />
-            </>
-          }
-        />
-        <Route
           path="/login"
           element={
-            <>
-              <Navbar />
+            <PublicRoute>
               <Login />
-            </>
+            </PublicRoute>
           }
         />
-
-        <Route path="/dashboard" element={<DashLayout />} />
-
         <Route
-          path="*"
+          path="/register"
           element={
-            <>
-              <Navbar />
+            <PublicRoute>
               <Register />
-            </>
+            </PublicRoute>
           }
         />
+        <Route path="/dashboard" element={<DashLayout />} />
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;
+
+// import React from "react";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import Navbar from "./Components/ui/Navbar";
+// import Register from "./Pages/Registration";
+// import Login from "./Pages/Login";
+// import "./App.css";
+// import { DashLayout } from "./Layout/Dashboardlayout";
+
+// const App = () => {
+//   return (
+//     <Router>
+//       <Routes>
+//         <Route
+//           path="/register"
+//           element={
+//             <>
+//               <Navbar />
+//               <Register />
+//             </>
+//           }
+//         />
+//         <Route
+//           path="/login"
+//           element={
+//             <>
+//               <Navbar />
+//               <Login />
+//             </>
+//           }
+//         />
+
+//         <Route path="/dashboard" element={<DashLayout />} />
+
+//         <Route
+//           path="*"
+//           element={
+//             <>
+//               <Navbar />
+//               <Register />
+//             </>
+//           }
+//         />
+//       </Routes>
+//     </Router>
+//   );
+// };
+
+// export default App;
