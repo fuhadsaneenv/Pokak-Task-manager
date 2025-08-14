@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,Link} from "react-router-dom";
 import axiosInstance from "../axiosInstance";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -145,12 +145,12 @@ export default function Register() {
             </button>
             <p className="mt-6 text-center text-sm text-gray-600">
               Already have an account?{" "}
-              <a
-                href="/login"
-                className="text-purple-600 font-medium hover:underline"
-              >
-                Log in
-              </a>
+              <Link
+  to="/login"
+  className="text-purple-600 font-medium hover:underline"
+>
+  Log in
+</Link>
             </p>
           </div>
         </form>
