@@ -15,7 +15,6 @@ app.use(cookieParser());
 
 const allowedOrigins = [
     "https://pokak-task-manager-x3sq.vercel.app",
-    "https://pokak-task-manager.onrender.com"
   ];
   app.use(cors({
     origin: function (origin, callback) {
