@@ -13,12 +13,13 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// ✅ Correct CORS setup
+// ✅ Allowed frontend URLs
 const allowedOrigins = [
   "https://pokak-task-manager-x3sq-1l4i9cmri.vercel.app"
 ];
 
-app.use(cors({
+// ✅ CORS configuration object
+const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -28,11 +29,15 @@ app.use(cors({
   },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+  allowedHeaders: ["Content-Type", "Authorization", "Accept"],
+  optionsSuccessStatus: 200
+};
 
-// ✅ Handle preflight requests
-app.options("*", cors());
+// ✅ Apply CORS globally
+app.use(cors(corsOptions));
+
+// ✅ Handle preflight with same options
+app.options("*", cors(corsOptions));
 
 connectDB();
 
@@ -47,7 +52,6 @@ const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server is running on Port ${PORT}`);
 });
-
 
 // import express from "express";
 // import dotenv from "dotenv";
