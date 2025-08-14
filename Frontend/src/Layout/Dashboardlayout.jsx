@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../axiosInstance';
 import { DashNavbar } from '../Components/DashUI/DashNavbar';
 import { DashSidebar } from '../Components/DashUI/DashSidebar';
-import { Taskview } from '../Components/DashUI/Taskview';
+import { Taskview } from '../Components/DashUI/Tasksview';
 import { TaskCreatePage } from '../Components/DashUI/TaskCreatePage';
 
  export function DashLayout() {
