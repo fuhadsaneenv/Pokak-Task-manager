@@ -15,6 +15,7 @@ app.use(cookieParser());
 
 const allowedOrigins = [
     "https://pokak-task-manager-x3sq.vercel.app",
+    "https://pokak-task-manager-x3sq-4jcpssdiu.vercel.app"
     
   ];
   app.use(cors({
