@@ -21,12 +21,10 @@ export function DashNavbar() {
     <>
       <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
         <div className="flex justify-between items-center px-4 sm:px-6 py-3">
-          {/* Logo */}
           <div className="flex items-center space-x-3">
             <img src="Logo.png" alt="Logo" className="h-8 w-auto" />
           </div>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-4 relative">
             <button className="p-2 rounded-full hover:bg-gray-100">
               <MoonIcon size={20} className="text-gray-500" />
@@ -60,7 +58,6 @@ export function DashNavbar() {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -75,7 +72,6 @@ export function DashNavbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden px-4 pb-4 space-y-2 border-t border-gray-100">
             <button className="w-full flex items-center p-2 rounded hover:bg-gray-100">

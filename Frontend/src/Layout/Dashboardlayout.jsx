@@ -11,7 +11,7 @@ export function DashLayout() {
   const [isCreatingTask, setIsCreatingTask] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [lists, setLists] = useState([]);
-  const [sidebarOpen, setSidebarOpen] = useState(false); // For mobile
+  const [sidebarOpen, setSidebarOpen] = useState(false); 
 
   useEffect(() => {
     fetchTasks();
@@ -73,7 +73,6 @@ export function DashLayout() {
       <DashNavbar />
 
       <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar for desktop */}
         <div className="hidden md:flex md:w-[300px] border-r border-gray-100 overflow-auto">
           <DashSidebar
             selectedDate={selectedDate}
@@ -86,7 +85,6 @@ export function DashLayout() {
           />
         </div>
 
-        {/* Sidebar toggle for mobile */}
         <div className={`fixed inset-0 z-50 bg-black/50 transition-opacity md:hidden ${sidebarOpen ? "opacity-100 visible" : "opacity-0 invisible"}`} onClick={() => setSidebarOpen(false)}></div>
         <div className={`fixed top-0 left-0 h-full z-50 w-64 bg-white border-r border-gray-100 transform transition-transform md:hidden ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
           <DashSidebar
@@ -103,9 +101,7 @@ export function DashLayout() {
           />
         </div>
 
-        {/* Main content */}
         <main className="flex-1 overflow-auto p-4 sm:p-6">
-          {/* Mobile menu button */}
           <button
             className="md:hidden mb-4 bg-gray-100 p-2 rounded-md"
             onClick={() => setSidebarOpen(true)}

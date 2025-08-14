@@ -47,13 +47,11 @@ export function Calendar({ selectedDate, onDateSelect }) {
 
   return (
     <div className="p-2 sm:p-4 w-full">
-      {/* Month & Year */}
       <div className="flex justify-center items-center mb-2 space-x-2">
         <h2 className="text-sm sm:text-base font-medium">{format(currentMonth, "MMMM")}</h2>
         <p className="text-xs sm:text-sm text-gray-500">{format(currentMonth, "yyyy")}</p>
       </div>
 
-      {/* Weekday Headers */}
       <div className="grid grid-cols-7 gap-0 text-center text-xs sm:text-sm">
         {weekDays.map((day) => (
           <div key={day} className="py-1 sm:py-2 font-semibold">
@@ -62,7 +60,6 @@ export function Calendar({ selectedDate, onDateSelect }) {
         ))}
       </div>
 
-      {/* Calendar Days */}
       <div className="grid grid-cols-7 gap-1 text-center">
         {calendarDays.map((day, i) => {
           const isCurrentMonth = isSameMonth(day, currentMonth);

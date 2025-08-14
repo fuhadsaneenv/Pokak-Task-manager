@@ -66,14 +66,12 @@ export function TaskCreatePage({ onSave, existingTags = [] }) {
 
   return (
     <div className="relative w-full min-h-screen max-w-5xl mx-auto bg-white p-4 sm:p-6 pb-24">
-      {/* Header */}
       <div className="flex flex-wrap items-center gap-2 mb-6">
         <h1 className="text-xl sm:text-2xl font-bold">New Task</h1>
         <img src="/Smile.png" alt="Logo" className="w-6 h-8 object-contain" />
       </div>
 
       <div className="space-y-6">
-        {/* Task Inputs */}
         <div className="space-y-4">
           <input
             type="text"
@@ -90,7 +88,6 @@ export function TaskCreatePage({ onSave, existingTags = [] }) {
           />
         </div>
 
-        {/* Card Color */}
         <div className="space-y-3">
           <h2 className="text-base font-bold text-gray-700">Card Color</h2>
           <div className="flex flex-wrap gap-3 sm:gap-6">
@@ -108,9 +105,7 @@ export function TaskCreatePage({ onSave, existingTags = [] }) {
           </div>
         </div>
 
-        {/* Repeat & Tag Sections */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Repeat Section */}
           <div className="bg-gray-50 rounded-2xl p-4 sm:p-6 shadow-sm">
             <div className="flex justify-between items-center mb-3">
               <h2 className="text-base font-semibold text-gray-800">Repeat</h2>
@@ -135,7 +130,6 @@ export function TaskCreatePage({ onSave, existingTags = [] }) {
               Set a cycle for your task
             </p>
 
-            {/* Cycle Buttons */}
             <div className="flex bg-gray-100 rounded-full p-1 mb-4 w-full overflow-x-auto">
               {["Daily", "Weekly", "Monthly"].map((option) => (
                 <button
@@ -152,7 +146,6 @@ export function TaskCreatePage({ onSave, existingTags = [] }) {
               ))}
             </div>
 
-            {/* Weekday Buttons */}
             <div className="flex flex-wrap gap-2 mb-4">
               {weekdays.map((day) => (
                 <button
@@ -181,7 +174,6 @@ export function TaskCreatePage({ onSave, existingTags = [] }) {
             </div>
           </div>
 
-          {/* Tag Section */}
           <div className="bg-gray-50 rounded-2xl p-4 sm:p-6 shadow-sm">
             <h2 className="text-base font-semibold text-gray-800 mb-3">
               Set a tag for your task
@@ -226,7 +218,6 @@ export function TaskCreatePage({ onSave, existingTags = [] }) {
         </div>
       </div>
 
-      {/* Save Button */}
       <button
         onClick={handleSave}
         className="fixed bottom-6 right-4 sm:right-6 bg-white text-black rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:scale-105 transition-transform"

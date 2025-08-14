@@ -32,7 +32,7 @@ export function DashSidebar({
                   } hover:bg-gray-50 rounded`}
                   onClick={() => {
                     onSelectView(task.name);
-                    setMobileOpen(false); // close sidebar on mobile when clicked
+                    setMobileOpen(false); 
                   }}
                 >
                   <span>{task.name}</span>
@@ -58,7 +58,7 @@ export function DashSidebar({
                     } hover:bg-gray-50 rounded`}
                     onClick={() => {
                       onSelectView(list.name);
-                      setMobileOpen(false); // close sidebar on mobile when clicked
+                      setMobileOpen(false); 
                     }}
                   >
                     <span>{list.name}</span>
@@ -75,7 +75,6 @@ export function DashSidebar({
 
   return (
     <>
-      {/* Mobile Hamburger */}
       <div className="md:hidden flex items-center p-2 border-b border-gray-100 bg-white">
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -90,19 +89,15 @@ export function DashSidebar({
         <span className="ml-2 font-semibold text-gray-700">Menu</span>
       </div>
 
-      {/* Sidebar */}
       <div className="hidden md:flex">{sidebarContent}</div>
 
-      {/* Mobile Slide-in Sidebar */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 flex">
-          {/* Overlay */}
           <div
             className="fixed inset-0 bg-black opacity-30"
             onClick={() => setMobileOpen(false)}
           ></div>
 
-          {/* Sidebar */}
           <div className="relative z-50 w-64">{sidebarContent}</div>
         </div>
       )}

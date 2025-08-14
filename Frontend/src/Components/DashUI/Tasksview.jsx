@@ -50,7 +50,6 @@ export function Taskview({ tasks, onToggleComplete, viewType, onCreateTask }) {
         ))}
       </div>
 
-      {/* Create Task Button */}
       <button
         className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 bg-white shadow-lg rounded-full p-3 flex items-center justify-center hover:scale-105 transition-transform"
         onClick={handleCreateTask}
@@ -58,7 +57,6 @@ export function Taskview({ tasks, onToggleComplete, viewType, onCreateTask }) {
         <PlusIcon className="h-6 w-6 text-gray-600" />
       </button>
 
-      {/* Task Modal */}
       {isModalOpen && selectedTask && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 sm:p-6">
           <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-md relative">

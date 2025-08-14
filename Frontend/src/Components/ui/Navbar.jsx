@@ -8,7 +8,6 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <div className="flex items-center space-x-3">
             <img
               src="/Logo.png"
@@ -17,7 +16,6 @@ export default function Navbar() {
             />
           </div>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6">
             <a
               href="#"
@@ -33,7 +31,6 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -45,7 +42,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
       {menuOpen && (
         <div className="md:hidden bg-white/90 backdrop-blur-sm border-t border-gray-200/50 px-4 py-3 space-y-3">
           <a
