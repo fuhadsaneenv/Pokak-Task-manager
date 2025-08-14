@@ -31,7 +31,7 @@ const allowedOrigins = [
 connectDB();
 
 // Backend routes
-app.use("/user", UserRouter);
+app.use("/api/user", UserRouter);
 app.use("/tasks", Taskrouter);
 
 // Error handler

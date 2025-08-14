@@ -48,7 +48,7 @@ export default function Register() {
     if (!validateForm()) return;
 
     try {
-      await axiosInstance.post("/user/register", formData);
+      await axiosInstance.post("/api/user/register", formData);
       toast.success("Registration successful!");
       setTimeout(() => navigate("/login"), 1500);
     } catch (err) {

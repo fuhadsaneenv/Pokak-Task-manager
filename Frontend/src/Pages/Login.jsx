@@ -34,7 +34,7 @@ export default function Login() {
     if (!validateForm()) return;
 
     try {
-      await axiosInstance.post("/user/login", { email, password });
+      await axiosInstance.post("/api/user/login", { email, password });
       toast.success("Login successful! Redirecting...");
       setTimeout(() => navigate("/dashboard"), 1500);
     } catch (err) {
