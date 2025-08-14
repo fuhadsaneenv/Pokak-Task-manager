@@ -13,19 +13,24 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-const allowedOrigins = [
-    "https://pokak-task-manager-x3sq.vercel.app",
-  ];
-  app.use(cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true
+// const allowedOrigins = [
+//     "https://pokak-task-manager-x3sq.vercel.app",
+//   ];
+//   app.use(cors({
+//     origin: function (origin, callback) {
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     credentials: true
+//   }));
+app.use(cors({
+    origin: "https://pokak-task-manager-x3sq.vercel.app", 
+    credentials: true 
   }));
+  
 
 
 connectDB();
