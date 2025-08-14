@@ -2,6 +2,8 @@ import Task from "../Models/taskModel.js";
 
 export const getTasks = async (req, res) => {
   const tasks = await Task.find({ user: req.user });
+  req.user = decoded.id;
+
   res.json(tasks);
 };
 
