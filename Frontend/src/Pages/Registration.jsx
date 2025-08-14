@@ -44,17 +44,34 @@ export default function Register() {
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!validateForm()) return;
-
+  
     try {
-      await axiosInstance.post("/api/user/register", formData);
+      const res = await axiosInstance.post("/api/user/register", formData);
+      
+      // Save token in localStorage
+      localStorage.setItem("token", res.data.token);
+  
       toast.success("Registration successful!");
-      setTimeout(() => navigate("/login"), 1500);
+      setTimeout(() => navigate("/dashboard"), 1500);
     } catch (err) {
       toast.error(err.response?.data?.message || "Something went wrong");
     }
   };
+//   const handleRegisterSubmit = async (e) => {
+//     e.preventDefault();
+
+//     if (!validateForm()) return;
+
+//     try {
+//       await axiosInstance.post("/api/user/register", formData);
+//       toast.success("Registration successful!");
+//       setTimeout(() => navigate("/login"), 1500);
+//     } catch (err) {
+//       toast.error(err.response?.data?.message || "Something went wrong");
+//     }
+//   };
 
   return (
     <div

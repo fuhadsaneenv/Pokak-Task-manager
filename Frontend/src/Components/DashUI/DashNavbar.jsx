@@ -1,20 +1,25 @@
 import React, { useState } from 'react'
 import { MoonIcon, BellIcon } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 export function DashNavbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const navigate = useNavigate()
 
-  const handleLogout = () => {
-    localStorage.removeItem('token')
-    toast.success('Logged out successfully!')
-    setTimeout(() => {
-      navigate('/login')
-    }, 1500) 
-  }
+//   const handleLogout = () => {
+//     localStorage.removeItem('token')
+//     toast.success('Logged out successfully!')
+//     setTimeout(() => {
+//       navigate('/login')
+//     }, 1500) 
+//   }
+const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+  
 
   return (
     <>

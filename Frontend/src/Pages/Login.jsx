@@ -32,15 +32,31 @@ export default function Login() {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-
+  
     try {
-      await axiosInstance.post("/api/user/login", { email, password });
+      const res = await axiosInstance.post("/api/user/login", { email, password });
+  
+      // Save token in localStorage
+      localStorage.setItem("token", res.data.token);
+  
       toast.success("Login successful! Redirecting...");
       setTimeout(() => navigate("/dashboard"), 1500);
     } catch (err) {
       toast.error(err.response?.data?.message || "Login failed");
     }
   };
+//   const handleLoginSubmit = async (e) => {
+//     e.preventDefault();
+//     if (!validateForm()) return;
+
+//     try {
+//       await axiosInstance.post("/api/user/login", { email, password });
+//       toast.success("Login successful! Redirecting...");
+//       setTimeout(() => navigate("/dashboard"), 1500);
+//     } catch (err) {
+//       toast.error(err.response?.data?.message || "Login failed");
+//     }
+//   };
 
   return (
     <div
