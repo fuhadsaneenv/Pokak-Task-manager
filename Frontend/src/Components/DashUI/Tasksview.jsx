@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Task } from './Task';
-import { PlusIcon } from 'lucide-react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
+import { Task } from "./Task";
+import { PlusIcon } from "lucide-react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export function Taskview({ tasks, onToggleComplete, viewType, onCreateTask }) {
   const [selectedTask, setSelectedTask] = useState(null);
@@ -25,14 +25,16 @@ export function Taskview({ tasks, onToggleComplete, viewType, onCreateTask }) {
     const task = tasks.find((t) => t._id === taskId);
     if (task) {
       toast.success(
-        `Task "${task.title}" marked as ${task.completed ? 'incomplete' : 'complete'}`
+        `Task "${task.title}" marked as ${
+          task.completed ? "incomplete" : "complete"
+        }`
       );
     }
   };
 
   const handleCreateTask = () => {
     onCreateTask();
-    toast.success('Opening task creation modal!');
+    toast.success("Opening task creation modal!");
   };
 
   return (
@@ -62,7 +64,7 @@ export function Taskview({ tasks, onToggleComplete, viewType, onCreateTask }) {
           <div className="bg-white p-6 rounded-lg shadow-lg w-[400px] relative">
             <h2 className="text-xl font-bold mb-2">{selectedTask.title}</h2>
             <p className="text-gray-600">
-              {selectedTask.description || 'No description available.'}
+              {selectedTask.description || "No description available."}
             </p>
 
             <button
@@ -88,4 +90,3 @@ export function Taskview({ tasks, onToggleComplete, viewType, onCreateTask }) {
     </div>
   );
 }
-

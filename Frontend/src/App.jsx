@@ -29,7 +29,7 @@ const App = () => {
           }
         />
 
-        <Route path="/dashboard" element={<DashLayout/>} />
+        <Route path="/dashboard" element={<DashLayout />} />
 
         <Route
           path="*"

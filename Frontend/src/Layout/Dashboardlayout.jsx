@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import axiosInstance from '../axiosInstance';
-import { DashNavbar } from '../Components/DashUI/DashNavbar';
-import { DashSidebar } from '../Components/DashUI/DashSidebar';
-import { Taskview } from '../Components/DashUI/Tasksview';
-import { TaskCreatePage } from '../Components/DashUI/TaskCreatePage';
+import React, { useEffect, useState } from "react";
+import axiosInstance from "../axiosInstance";
+import { DashNavbar } from "../Components/DashUI/DashNavbar";
+import { DashSidebar } from "../Components/DashUI/DashSidebar";
+import { Taskview } from "../Components/DashUI/Tasksview";
+import { TaskCreatePage } from "../Components/DashUI/TaskCreatePage";
 
- export function DashLayout() {
+export function DashLayout() {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedView, setSelectedView] = useState('Today');
+  const [selectedView, setSelectedView] = useState("Today");
   const [isCreatingTask, setIsCreatingTask] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [lists, setLists] = useState([]);
@@ -21,7 +21,9 @@ import { TaskCreatePage } from '../Components/DashUI/TaskCreatePage';
       const res = await axiosInstance.get("/api/tasks");
       setTasks(res.data);
 
-      const uniqueTags = [...new Set(res.data.map(t => t.tag).filter(Boolean))];
+      const uniqueTags = [
+        ...new Set(res.data.map((t) => t.tag).filter(Boolean)),
+      ];
       setLists(uniqueTags.map((tag, i) => ({ id: i + 1, name: tag })));
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -33,10 +35,10 @@ import { TaskCreatePage } from '../Components/DashUI/TaskCreatePage';
   const handleSaveTask = async (newTask) => {
     try {
       const res = await axiosInstance.post("/api/tasks", newTask);
-      setTasks(prev => [...prev, res.data]);
+      setTasks((prev) => [...prev, res.data]);
 
-      if (newTask.tag && !lists.find(list => list.name === newTask.tag)) {
-        setLists(prev => [...prev, { id: Date.now(), name: newTask.tag }]);
+      if (newTask.tag && !lists.find((list) => list.name === newTask.tag)) {
+        setLists((prev) => [...prev, { id: Date.now(), name: newTask.tag }]);
       }
 
       setIsCreatingTask(false);
@@ -46,12 +48,14 @@ import { TaskCreatePage } from '../Components/DashUI/TaskCreatePage';
   };
 
   const toggleTaskCompletion = async (id) => {
-    const task = tasks.find(t => t._id === id);
+    const task = tasks.find((t) => t._id === id);
     if (!task) return;
 
     try {
-      const res = await axiosInstance.put(`/api/tasks/${id}`, { completed: !task.completed });
-      setTasks(prev => prev.map(t => t._id === id ? res.data : t));
+      const res = await axiosInstance.put(`/api/tasks/${id}`, {
+        completed: !task.completed,
+      });
+      setTasks((prev) => prev.map((t) => (t._id === id ? res.data : t)));
     } catch (error) {
       console.error("Error updating task:", error);
     }
@@ -59,7 +63,9 @@ import { TaskCreatePage } from '../Components/DashUI/TaskCreatePage';
 
   const handleSelectView = (viewName) => setSelectedView(viewName);
 
-  const filteredTasks = tasks.filter(task => selectedView === 'Today' ? true : task.tag === selectedView);
+  const filteredTasks = tasks.filter((task) =>
+    selectedView === "Today" ? true : task.tag === selectedView
+  );
 
   return (
     <div className="h-screen flex flex-col overflow-hidden">
@@ -82,7 +88,7 @@ import { TaskCreatePage } from '../Components/DashUI/TaskCreatePage';
           {isCreatingTask ? (
             <TaskCreatePage
               onSave={handleSaveTask}
-              existingTags={lists.map(l => l.name)}
+              existingTags={lists.map((l) => l.name)}
             />
           ) : (
             <Taskview
@@ -97,4 +103,3 @@ import { TaskCreatePage } from '../Components/DashUI/TaskCreatePage';
     </div>
   );
 }
-

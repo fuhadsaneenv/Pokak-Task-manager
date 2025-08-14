@@ -13,10 +13,9 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-const allowedOrigins = [
-    "https://pokak-task-manager-x3sq.vercel.app",    
-  ];
-  app.use(cors({
+const allowedOrigins = ["https://pokak-task-manager-x3sq.vercel.app"];
+app.use(
+  cors({
     origin: function (origin, callback) {
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
@@ -24,18 +23,15 @@ const allowedOrigins = [
         callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true
-  }));
-  
-
+    credentials: true,
+  })
+);
 
 connectDB();
 
-// Backend routes
 app.use("/api/user", UserRouter);
 app.use("/api/tasks", Taskrouter);
 
-// Error handler
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5001;

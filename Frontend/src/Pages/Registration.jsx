@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate ,Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../axiosInstance";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -44,34 +44,22 @@ export default function Register() {
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!validateForm()) return;
-  
+
     try {
       const res = await axiosInstance.post("/api/user/register", formData);
-      
+
       // Save token in localStorage
       localStorage.setItem("token", res.data.token);
-  
+
       toast.success("Registration successful!");
       setTimeout(() => navigate("/dashboard"), 1500);
     } catch (err) {
       toast.error(err.response?.data?.message || "Something went wrong");
     }
   };
-//   const handleRegisterSubmit = async (e) => {
-//     e.preventDefault();
 
-//     if (!validateForm()) return;
-
-//     try {
-//       await axiosInstance.post("/api/user/register", formData);
-//       toast.success("Registration successful!");
-//       setTimeout(() => navigate("/login"), 1500);
-//     } catch (err) {
-//       toast.error(err.response?.data?.message || "Something went wrong");
-//     }
-//   };
 
   return (
     <div
@@ -146,11 +134,11 @@ export default function Register() {
             <p className="mt-6 text-center text-sm text-gray-600">
               Already have an account?{" "}
               <Link
-  to="/login"
-  className="text-purple-600 font-medium hover:underline"
->
-  Log in
-</Link>
+                to="/login"
+                className="text-purple-600 font-medium hover:underline"
+              >
+                Log in
+              </Link>
             </p>
           </div>
         </form>

@@ -1,33 +1,26 @@
 import Task from "../Models/taskModel.js";
 
 export const getTasks = async (req, res) => {
-    try {
-      // req.user is already set by protect middleware
-      const tasks = await Task.find({ user: req.user });
-      res.json(tasks);
-    } catch (error) {
-      res.status(500).json({ message: "Error fetching tasks" });
-    }
-  };
-  
-// export const createTask = async (req, res) => {
-//   const task = new Task({ ...req.body, user: req.user });
-//   const saved = await task.save();
-//   res.status(201).json(saved);
-// };
+  try {
+    const tasks = await Task.find({ user: req.user });
+    res.json(tasks);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching tasks" });
+  }
+};
+
 export const createTask = async (req, res) => {
-    try {
-      const task = new Task({
-        ...req.body,
-        user: req.user // req.user is the user's ID from the token
-      });
-      const saved = await task.save();
-      res.status(201).json(saved);
-    } catch (error) {
-      res.status(500).json({ message: "Error creating task" });
-    }
-  };
-  
+  try {
+    const task = new Task({
+      ...req.body,
+      user: req.user,
+    });
+    const saved = await task.save();
+    res.status(201).json(saved);
+  } catch (error) {
+    res.status(500).json({ message: "Error creating task" });
+  }
+};
 
 export const updateTask = async (req, res) => {
   const task = await Task.findById(req.params.id);

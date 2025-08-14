@@ -1,35 +1,26 @@
-import React, { useState } from 'react'
-import { MoonIcon, BellIcon } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
-import { ToastContainer ,toast} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import React, { useState } from "react";
+import { MoonIcon, BellIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export function DashNavbar() {
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const navigate = useNavigate()
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    toast.success('Logged out successfully!')
+    localStorage.removeItem("token");
+    toast.success("Logged out successfully!");
     setTimeout(() => {
-      navigate('/login')
-    }, 1500) 
-  }
-// const handleLogout = () => {
-//     localStorage.removeItem("token");
-//     navigate("/login");
-//   };
-  
+      navigate("/login");
+    }, 1500);
+  };
 
   return (
     <>
       <header className="sticky top-0 z-50 flex justify-between items-center px-6 py-4 border-b border-gray-100 bg-white">
         <div className="flex items-center space-x-3">
-          <img
-            src="Logo.png"
-            alt="Logo"
-            className="h-8 w-25"
-          />
+          <img src="Logo.png" alt="Logo" className="h-8 w-25" />
         </div>
 
         <div className="flex items-center space-x-4 relative">
@@ -79,6 +70,5 @@ export function DashNavbar() {
         theme="colored"
       />
     </>
-  )
+  );
 }
-
