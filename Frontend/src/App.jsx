@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/ui/Navbar";
 import Register from "./Pages/Registration";
 import Login from "./Pages/Login";
-import { DashLayout } from "./Layout/dashLayout";
 import "./App.css";
+import { DashLayout } from "./Layout/Dashboardlayout";
 
 const App = () => {
   return (
@@ -29,7 +29,7 @@ const App = () => {
           }
         />
 
-        <Route path="/dashboard" element={<DashLayout />} />
+        <Route path="/dashboard" element={<DashLayout/>} />
 
         <Route
           path="*"
