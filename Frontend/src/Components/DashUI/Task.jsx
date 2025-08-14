@@ -21,17 +21,26 @@ export function Task({ task, onToggleComplete, onOpenModal }) {
   const getBgColor = () => colorMap[task.color] || "bg-gray-100";
 
   return (
-    <div className={`p-4 rounded-md ${getBgColor()} flex items-center`}>
+    <div
+      className={`p-3 sm:p-4 rounded-md ${getBgColor()} flex items-center space-x-3 sm:space-x-4`}
+    >
       <input
         type="checkbox"
         checked={task.completed}
         onChange={onToggleComplete}
-        className="w-5 h-5 mr-3 cursor-pointer"
+        className="w-4 h-4 sm:w-5 sm:h-5 cursor-pointer flex-shrink-0"
       />
 
-      <div className="flex items-center cursor-pointer" onClick={onOpenModal}>
-        <BookOpenIcon size={18} className="text-gray-500 mr-2" />
-        <span className={task.completed ? "line-through text-gray-500" : ""}>
+      <div
+        className="flex items-center cursor-pointer flex-1 overflow-hidden"
+        onClick={onOpenModal}
+      >
+        <BookOpenIcon size={16} className="text-gray-500 mr-2 flex-shrink-0" />
+        <span
+          className={`truncate ${
+            task.completed ? "line-through text-gray-500" : "text-gray-800"
+          } text-sm sm:text-base`}
+        >
           {task.title}
         </span>
       </div>

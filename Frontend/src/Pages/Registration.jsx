@@ -50,7 +50,6 @@ export default function Register() {
     try {
       const res = await axiosInstance.post("/api/user/register", formData);
 
-      // Save token in localStorage
       localStorage.setItem("token", res.data.token);
 
       toast.success("Registration successful!");
@@ -60,35 +59,34 @@ export default function Register() {
     }
   };
 
-
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      className="min-h-screen flex items-center justify-center bg-cover bg-center px-4"
       style={{ backgroundImage: "url('Line.png')" }}
     >
-      <div className="bg-white/5 backdrop-blur-md rounded-3xl shadow-lg w-[750px] min-h-[500px] p-10">
-        <h2 className="text-xl font-bold text-center text-blue-400 mb-7">
+      <div className="bg-white/5 backdrop-blur-md rounded-3xl shadow-2xl w-full max-w-md sm:max-w-lg md:max-w-2xl p-6 sm:p-8 md:p-10">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-center text-blue-400 mb-5 sm:mb-7">
           Register
         </h2>
-        <p className="text-center font-bold text-gray-500 text-sm mb-6">
-          Welcome! Sign in using your social <br />
+        <p className="text-center font-bold text-gray-500 text-xs sm:text-sm mb-5 sm:mb-6">
+          Welcome! Sign in using your social <br className="hidden sm:block" />
           account or email to continue.
         </p>
 
-        <div className="flex justify-center space-x-6 mb-8">
-          <button className="p-2">
-            <FaFacebook className="text-blue-600 text-2xl" />
+        <div className="flex justify-center space-x-4 sm:space-x-6 mb-6 sm:mb-8">
+          <button className="p-2 hover:scale-110 transition">
+            <FaFacebook className="text-blue-600 text-xl sm:text-2xl" />
           </button>
-          <button className="p-2">
-            <FcGoogle className="text-2xl" />
+          <button className="p-2 hover:scale-110 transition">
+            <FcGoogle className="text-xl sm:text-2xl" />
           </button>
-          <button className="p-2">
-            <BsApple className="text-black text-2xl" />
+          <button className="p-2 hover:scale-110 transition">
+            <BsApple className="text-black text-xl sm:text-2xl" />
           </button>
         </div>
 
-        <form className="space-y-6" onSubmit={handleRegisterSubmit}>
-          <div className="border-b border-gray-300 py-2 w-[300px] mx-auto">
+        <form className="space-y-4 sm:space-y-6" onSubmit={handleRegisterSubmit}>
+          <div className="border-b border-gray-300 py-2 w-full max-w-xs sm:max-w-sm mx-auto">
             <input
               type="text"
               name="name"
@@ -100,7 +98,7 @@ export default function Register() {
             />
           </div>
 
-          <div className="border-b border-gray-300 py-2 w-[300px] mx-auto">
+          <div className="border-b border-gray-300 py-2 w-full max-w-xs sm:max-w-sm mx-auto">
             <input
               type="email"
               name="email"
@@ -112,7 +110,7 @@ export default function Register() {
             />
           </div>
 
-          <div className="border-b border-gray-300 py-2 w-[300px] mx-auto">
+          <div className="border-b border-gray-300 py-2 w-full max-w-xs sm:max-w-sm mx-auto">
             <input
               type="password"
               name="password"
@@ -124,14 +122,14 @@ export default function Register() {
             />
           </div>
 
-          <div className="pt-6">
+          <div className="pt-4 sm:pt-6">
             <button
               type="submit"
-              className="w-[200px] mx-auto block py-3 rounded-2xl bg-white/30 text-black font-medium border border-gray-200 shadow-sm hover:bg-gray-50 transition"
+              className="w-full sm:w-[200px] mx-auto block py-2 sm:py-3 rounded-2xl bg-white/30 text-black font-medium border border-gray-200 shadow-sm hover:bg-gray-50 transition"
             >
               Register
             </button>
-            <p className="mt-6 text-center text-sm text-gray-600">
+            <p className="mt-4 sm:mt-6 text-center text-xs sm:text-sm text-gray-600">
               Already have an account?{" "}
               <Link
                 to="/login"
@@ -148,3 +146,4 @@ export default function Register() {
     </div>
   );
 }
+
