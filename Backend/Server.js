@@ -14,9 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const allowedOrigins = [
-    "https://pokak-task-manager-x3sq.vercel.app",
-    "https://pokak-task-manager-x3sq-4jcpssdiu.vercel.app"
-    
+    "https://pokak-task-manager-x3sq.vercel.app",    
   ];
   app.use(cors({
     origin: function (origin, callback) {

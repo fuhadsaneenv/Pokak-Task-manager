@@ -36,7 +36,6 @@ export default function Login() {
     try {
       const res = await axiosInstance.post("/api/user/login", { email, password });
   
-      // Save token in localStorage
       localStorage.setItem("token", res.data.token);
   
       toast.success("Login successful! Redirecting...");
