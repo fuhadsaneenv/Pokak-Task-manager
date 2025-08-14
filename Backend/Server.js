@@ -27,9 +27,7 @@ const allowedOrigins = [
     },
     credentials: true
   }));
-  app.use(cors({
-    origin: "*"
-  }));
+  
 
 
 connectDB();
