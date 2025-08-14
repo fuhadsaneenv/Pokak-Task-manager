@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://pokak-task-manager-x3sq-g60dfua1p.vercel.app/",
+    origin: "https://pokak-task-manager-x3sq.vercel.app",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
