@@ -18,7 +18,7 @@ import { TaskCreatePage } from '../Components/DashUI/TaskCreatePage';
 
   const fetchTasks = async () => {
     try {
-      const res = await axiosInstance.get("/api/tasks");
+      const res = await axiosInstance.get("/tasks");
       setTasks(res.data);
 
       const uniqueTags = [...new Set(res.data.map(t => t.tag).filter(Boolean))];
@@ -32,7 +32,7 @@ import { TaskCreatePage } from '../Components/DashUI/TaskCreatePage';
 
   const handleSaveTask = async (newTask) => {
     try {
-      const res = await axiosInstance.post("/api/tasks", newTask);
+      const res = await axiosInstance.post("/tasks", newTask);
       setTasks(prev => [...prev, res.data]);
 
       if (newTask.tag && !lists.find(list => list.name === newTask.tag)) {
@@ -50,7 +50,7 @@ import { TaskCreatePage } from '../Components/DashUI/TaskCreatePage';
     if (!task) return;
 
     try {
-      const res = await axiosInstance.put(`/api/tasks/${id}`, { completed: !task.completed });
+      const res = await axiosInstance.put(`/tasks/${id}`, { completed: !task.completed });
       setTasks(prev => prev.map(t => t._id === id ? res.data : t));
     } catch (error) {
       console.error("Error updating task:", error);
