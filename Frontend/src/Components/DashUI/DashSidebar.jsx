@@ -13,7 +13,6 @@ export function DashSidebar({ selectedDate, onDateSelect,  selectedView, lists, 
       <div className="sticky top-0 h-screen overflow-auto">
         <Calendar selectedDate={selectedDate} onDateSelect={onDateSelect} />
 
-        {/* Tasks Section */}
         <div className="mt-4">
           <h2 className="px-4 py-2 text-sm font-medium text-gray-500">Tasks</h2>
           <ul>
@@ -33,7 +32,6 @@ export function DashSidebar({ selectedDate, onDateSelect,  selectedView, lists, 
           </ul>
         </div>
 
-        {/* Lists Section */}
         <div className="mt-4">
           <h2 className="px-4 py-2 text-sm font-medium text-gray-500">Lists</h2>
           <ul>

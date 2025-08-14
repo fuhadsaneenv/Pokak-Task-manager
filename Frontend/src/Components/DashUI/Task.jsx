@@ -22,7 +22,6 @@ export function Task({ task, onToggleComplete, onOpenModal }) {
 
   return (
     <div className={`p-4 rounded-md ${getBgColor()} flex items-center`}>
-      {/* Checkbox */}
       <input
         type="checkbox"
         checked={task.completed}
@@ -30,7 +29,6 @@ export function Task({ task, onToggleComplete, onOpenModal }) {
         className="w-5 h-5 mr-3 cursor-pointer"
       />
 
-      {/* Task info (clickable for modal) */}
       <div
         className="flex items-center cursor-pointer"
         onClick={onOpenModal}

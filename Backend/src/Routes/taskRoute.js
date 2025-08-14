@@ -13,6 +13,5 @@ Taskrouter.get('/', protect,getTasks);
 Taskrouter.post('/',protect, createTask);
 Taskrouter.put('/:id',protect, updateTask);
 Taskrouter.delete('/:id',protect, deleteTask);
-// Taskrouter.patch('/:id/toggle', toggleTask);
 
 export default Taskrouter;

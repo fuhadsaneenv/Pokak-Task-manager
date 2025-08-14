@@ -12,22 +12,33 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const validateForm = () => {
+    if (!email.trim()) {
+      toast.error("Email is required");
+      return false;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Enter a valid email");
+      return false;
+    }
+    if (!password) {
+      toast.error("Password is required");
+      return false;
+    }
+    return true;
+  };
+
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
 
     try {
-      const response = await axiosInstance.post("/user/login", {
-        email,
-        password,
-      });
-      console.log("Login success:", response.data);
-      toast.success("Login successful! Redirecting..."); // Success toast
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 1500); // wait 1.5 sec for toast to show
+      await axiosInstance.post("/user/login", { email, password });
+      toast.success("Login successful! Redirecting...");
+      setTimeout(() => navigate("/dashboard"), 1500);
     } catch (err) {
-      console.error(err);
-      toast.error(err.response?.data?.message || "Login failed"); // Error toast
+      toast.error(err.response?.data?.message || "Login failed");
     }
   };
 
@@ -42,7 +53,7 @@ export default function Login() {
         </h2>
         <p className="text-center font-bold text-gray-500 text-sm mb-6">
           Welcome! Sign in using your social <br />
-          account or email to continue us.
+          account or email to continue.
         </p>
 
         <div className="flex justify-center space-x-6 mb-8">
@@ -62,9 +73,9 @@ export default function Login() {
             <input
               type="email"
               placeholder="Email"
-              className="w-[300px] mx-auto block px-1 py-1 outline-none text-sm bg-transparent"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-1 py-1 outline-none text-sm bg-transparent"
               required
             />
           </div>
@@ -72,9 +83,9 @@ export default function Login() {
             <input
               type="password"
               placeholder="Password"
-              className="w-[300px] mx-auto block px-1 py-1 outline-none text-sm bg-transparent"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-1 py-1 outline-none text-sm bg-transparent"
               required
             />
           </div>
@@ -97,22 +108,22 @@ export default function Login() {
             Sign Up
           </Link>
         </p>
-      </div>
 
-      {/* Toast Container */}
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+      </div>
     </div>
   );
 }
+
 

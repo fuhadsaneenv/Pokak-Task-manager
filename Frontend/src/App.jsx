@@ -1,19 +1,15 @@
-
-
-
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Navbar from './Components/ui/Navbar'
-import Register from './Pages/Registration'
-import Login from './Pages/Login'
-import { DashLayout } from './Layout/dashLayout'
-import "./App.css"
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./Components/ui/Navbar";
+import Register from "./Pages/Registration";
+import Login from "./Pages/Login";
+import { DashLayout } from "./Layout/dashLayout";
+import "./App.css";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        
         <Route
           path="/register"
           element={
@@ -33,7 +29,6 @@ const App = () => {
           }
         />
 
-
         <Route path="/dashboard" element={<DashLayout />} />
 
         <Route
@@ -47,7 +42,7 @@ const App = () => {
         />
       </Routes>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;

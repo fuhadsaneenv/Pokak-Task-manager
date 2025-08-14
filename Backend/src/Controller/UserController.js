@@ -52,12 +52,13 @@ export const login = async (req, res, next) => {
       return next(error);
     }
 
-    generateToken(res, user._id);
+    const token = generateToken(res, user._id);
 
     res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
+      token
     });
   } catch (error) {
     next(error);  
@@ -72,3 +73,18 @@ export const logout = (req, res, next) => {
     next(error);
   }
 };
+
+// export const getCurrentUser = async (req, res, next) => {
+//     try {
+//       const token = req.cookies.token;
+//       if (!token) return res.status(401).json({ message: "Not authenticated" });
+  
+//       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//       const user = await User.findById(decoded.id).select("-password");
+//       if (!user) return res.status(404).json({ message: "User not found" });
+  
+//       res.json(user);
+//     } catch (err) {
+//       next(err);
+//     }
+//   };

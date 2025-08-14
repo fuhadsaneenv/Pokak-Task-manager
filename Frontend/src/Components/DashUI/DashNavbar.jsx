@@ -9,12 +9,11 @@ export function DashNavbar() {
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    // Remove token on logout
     localStorage.removeItem('token')
     toast.success('Logged out successfully!')
     setTimeout(() => {
       navigate('/login')
-    }, 1500) // wait 1.5 sec for toast
+    }, 1500) 
   }
 
   return (
@@ -36,7 +35,6 @@ export function DashNavbar() {
             <BellIcon size={20} className="text-gray-500" />
           </button>
 
-          {/* Profile */}
           <div className="relative">
             <button
               className="flex items-center space-x-2 h-8 w-8 rounded-full bg-gray-600 overflow-hidden focus:outline-none"
@@ -49,7 +47,6 @@ export function DashNavbar() {
               />
             </button>
 
-            {/* Dropdown */}
             {dropdownOpen && (
               <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-lg">
                 <button
@@ -64,7 +61,6 @@ export function DashNavbar() {
         </div>
       </header>
 
-      {/* Toast Container */}
       <ToastContainer
         position="top-right"
         autoClose={3000}

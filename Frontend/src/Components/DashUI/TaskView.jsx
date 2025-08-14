@@ -50,7 +50,6 @@ export function TaskView({ tasks, onToggleComplete, viewType, onCreateTask }) {
         ))}
       </div>
 
-      {/* Floating Add Button */}
       <button
         className="fixed bottom-6 right-6 bg-white shadow-lg rounded-full p-3"
         onClick={handleCreateTask}
@@ -58,7 +57,6 @@ export function TaskView({ tasks, onToggleComplete, viewType, onCreateTask }) {
         <PlusIcon className="h-6 w-6 text-gray-600" />
       </button>
 
-      {/* Modal */}
       {isModalOpen && selectedTask && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-[400px] relative">
@@ -77,7 +75,6 @@ export function TaskView({ tasks, onToggleComplete, viewType, onCreateTask }) {
         </div>
       )}
 
-      {/* Toast Container */}
       <ToastContainer
         position="top-right"
         autoClose={3000}
