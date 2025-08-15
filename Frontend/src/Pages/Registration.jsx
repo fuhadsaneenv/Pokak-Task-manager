@@ -70,7 +70,7 @@ export default function Register() {
         </h2>
         <p className="text-center font-bold text-gray-500 text-xs sm:text-sm mb-5 sm:mb-6">
           Welcome! Sign in using your social <br className="hidden sm:block" />
-          account or email to continue.
+          account or email to continue...
         </p>
 
         <div className="flex justify-center space-x-4 sm:space-x-6 mb-6 sm:mb-8">
