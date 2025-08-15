@@ -202,17 +202,24 @@ export function TaskCreatePage({ onSave, existingTags = [] }) {
                 </button>
               )}
 
-              {showNewTagInput && (
-                <input
-                  type="text"
-                  value={newTagName}
-                  autoFocus
-                  onChange={(e) => setNewTagName(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleAddNewTag()}
-                  placeholder="New tag"
-                  className="px-3 py-1 sm:px-4 sm:py-2 text-sm border border-gray-300 rounded-full focus:outline-none focus:ring focus:ring-blue-200"
-                />
-              )}
+{showNewTagInput && (
+  <div className="flex gap-2 items-center">
+    <input
+      type="text"
+      value={newTagName}
+      autoFocus
+      onChange={(e) => setNewTagName(e.target.value)}
+      placeholder="New tag"
+      className="px-3 py-1 sm:px-4 sm:py-2 text-sm border border-gray-300 rounded-full focus:outline-none focus:ring focus:ring-blue-200"
+    />
+    <button
+      onClick={handleAddNewTag}
+      className="px-3 py-1 sm:px-4 sm:py-2 text-sm bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
+    >
+      +
+    </button>
+  </div>
+)}
             </div>
           </div>
         </div>
